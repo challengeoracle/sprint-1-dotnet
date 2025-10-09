@@ -81,6 +81,10 @@ namespace Medix.Controllers
             {
                 return NotFound();
             }
+
+            // Envia as opções de status para a view de edição
+            ViewBag.StatusOptions = new SelectList(Enum.GetValues(typeof(StatusUnidade)));
+
             return View(unidadeMedica);
         }
 
