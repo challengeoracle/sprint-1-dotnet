@@ -1,40 +1,36 @@
 /* Definição da Paleta de Cores Medix como Variáveis CSS */
 :root {
-    --medix-50: #FAF9F6; /* off-white suave */
-    --medix-100: #E9F4F1; /* fundo claro esverdeado */
-    --medix-200: #CFE7E2; /* input background */
-    --medix-300: #A9D2C7; /* bordas, detalhes sutis */
-    --medix-400: #7DBBAF; /* placeholders, ícones suaves */
-    --medix-500: #52A897; /* botão secundário */
-    --medix-600: #3A8F80; /* verde principal, tom médio equilibrado */
-    --medix-700: #2C6F64; /* texto escuro / destaques */
-    --medix-800: #1E4F46; /* verde profundo para contraste */
-    --medix-900: #122F29; /* fundo escuro elegante */
-    --medix-error: #E45865; /* tom de erro harmônico com verde */
-
-    --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --medix-50: #FAF9F6;
+    --medix-100: #E9F4F1;
+    --medix-200: #CFE7E2;
+    --medix-300: #A9D2C7;
+    --medix-400: #7DBBAF;
+    --medix-500: #52A897;
+    --medix-600: #3A8F80;
+    --medix-700: #2C6F64;
+    --medix-800: #1E4F46;
+    --medix-900: #122F29;
+    --medix-error: #E45865;
+    --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
 }
 
-/* Estilo global do corpo */
+/* --- ESTILOS GERAIS --- */
 body {
     background-color: var(--medix-50) !important;
     font-family: var(--font-family-sans-serif);
     color: var(--medix-800);
 }
 
+/* --- ESTILOS PARA FORMULÁRIOS DE AUTENTICAÇÃO E CRUD --- */
 .auth-container {
     max-width: 450px;
     padding: 2rem;
-    margin-top: 8vh;
-    margin-bottom: 8vh;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 4vh auto; /* Margem dinâmica para melhor centralização */
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Cabeçalho com Logo, Título e Subtítulo */
 .auth-header {
     text-align: center;
     margin-bottom: 2.5rem;
@@ -58,7 +54,6 @@ body {
     font-size: 1rem;
 }
 
-/* Estilo para os grupos de formulário (label + input) */
 .form-group {
     margin-bottom: 1.25rem;
 }
@@ -70,7 +65,6 @@ body {
         color: var(--medix-800);
     }
 
-/* Estilo para os inputs */
 .form-control {
     background-color: white;
     border: 1px solid var(--medix-300);
@@ -79,6 +73,7 @@ body {
     height: auto;
     color: var(--medix-900);
     transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; /* Garante que o input ocupe todo o espaço */
 }
 
     .form-control::placeholder {
@@ -91,31 +86,12 @@ body {
         background-color: white;
     }
 
-/* Estilo base do Botão Primário */
-.btn-primary {
-    background-color: var(--medix-600);
-    border-color: var(--medix-600);
-    border-radius: 12px;
-    padding: 0.75rem 1.5rem; 
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: white !important; 
-    text-decoration: none;
-    transition: background-color 0.2s;
+.text-danger {
+    color: var(--medix-error) !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
-    .btn-primary:hover {
-        background-color: var(--medix-700);
-        border-color: var(--medix-700);
-    }
-
-/* Regra específica para os botões de formulário terem 100% de largura */
-.auth-container .btn-primary {
-    width: 100%;
-    margin-top: 1rem;
-}
-
-/* Rodapé com link para outra página */
 .auth-footer {
     text-align: center;
     margin-top: 2rem;
@@ -135,52 +111,66 @@ body {
             text-decoration: underline;
         }
 
-/* Mensagens de validação de erro */
-.text-danger {
-    color: var(--medix-error) !important;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+/* --- ESTILOS DE BOTÕES --- */
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-secondary {
+button.btn-primary, a.btn-primary {
+    background-color: var(--medix-600);
+    border-color: var(--medix-600);
+    color: white !important;
+}
+
+    button.btn-primary:hover, a.btn-primary:hover {
+        background-color: var(--medix-700);
+        border-color: var(--medix-700);
+    }
+
+button.btn-secondary, a.btn-secondary {
     background-color: var(--medix-200);
     border-color: var(--medix-300);
     color: var(--medix-800);
-    border-radius: 12px;
-    padding: 0.9rem;
-    font-size: 1rem;
-    font-weight: 700;
-    transition: background-color 0.2s;
-    margin-top: 1rem;
-    width: 100%;
 }
 
-    .btn-secondary:hover {
+    button.btn-secondary:hover, a.btn-secondary:hover {
         background-color: var(--medix-300);
         border-color: var(--medix-400);
-        color: var(--medix-900);
     }
 
-/* Estilo para um rodapé mínimo e centralizado */
-footer.footer {
-    height: 40px !important;
-    min-height: auto !important;
-    padding: 0 !important;
-    font-size: 0.75rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+button.btn-danger, a.btn-danger {
+    background-color: var(--medix-error);
+    border-color: var(--medix-error);
+    color: white !important;
 }
 
-    /* Remove o container para o texto não ficar preso na lateral */
-    footer.footer .container {
-        width: auto;
-        max-width: 100%;
+    button.btn-danger:hover, a.btn-danger:hover {
+        background-color: #c13c49;
+        border-color: #c13c49;
     }
 
-/* Estilos para a página de listagem (Index) */
+.auth-container .btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+}
 
-/* Cabeçalho da Página (Título à esquerda, botão à direita) */
+.form-actions {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+}
+
+/* --- ESTILOS DE PÁGINA DE LISTAGEM (INDEX) --- */
 .card {
     background-color: white;
     border-radius: 12px;
@@ -208,17 +198,6 @@ footer.footer {
     padding: 1.5rem;
 }
 
-/* Container da Tabela */
-.table-container.card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
-    border: none;
-    overflow-x: auto;
-}
-
-/* Estilo customizado para a tabela */
 .table {
     border-collapse: collapse;
     width: 100%;
@@ -249,7 +228,6 @@ footer.footer {
         background-color: var(--medix-50);
     }
 
-/* Badges de Status Coloridos */
 .badge {
     padding: 0.35rem 0.75rem;
     border-radius: 50px;
@@ -277,7 +255,6 @@ footer.footer {
     background-color: #d1ecf1;
 }
 
-/* Links de Ação na Tabela */
 .action-link {
     color: var(--medix-600);
     font-weight: 500;
@@ -298,3 +275,19 @@ footer.footer {
         .action-link.text-danger:hover {
             color: #a53d47 !important;
         }
+
+/* --- ESTILOS DO RODAPÉ PRINCIPAL --- */
+footer.footer {
+    height: 40px !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    font-size: 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+    footer.footer .container {
+        width: auto;
+        max-width: 100%;
+    }
