@@ -48,19 +48,21 @@ namespace Medix.Controllers
         // GET: UnidadesMedicas/Create
         public IActionResult Create()
         {
-            // A linha abaixo cria uma lista com os nomes do enum "StatusUnidade"
-            // e a envia para a View através do ViewBag.
-            ViewBag.StatusOptions = new SelectList(Enum.GetValues(typeof(StatusUnidade)));
+            // A linha do ViewBag foi removida, pois a View agora usa o @Html.GetEnumSelectList
             return View();
         }
 
         // POST: UnidadesMedicas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,CNPJ,Endereco,Telefone,EmailAdmin,Status,DataCadastro")] UnidadeMedica unidadeMedica)
+        // O campo "DataCadastro" foi removido do [Bind]
+        public async Task<IActionResult> Create([Bind("Id,Nome,CNPJ,Endereco,Telefone,EmailAdmin,Status")] UnidadeMedica unidadeMedica)
         {
             if (ModelState.IsValid)
             {
+                // A data de cadastro é definida automaticamente pelo servidor
+                unidadeMedica.DataCadastro = DateTime.Now;
+
                 _context.Add(unidadeMedica);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,9 +84,8 @@ namespace Medix.Controllers
                 return NotFound();
             }
 
-            // Envia as opções de status para a view de edição
-            ViewBag.StatusOptions = new SelectList(Enum.GetValues(typeof(StatusUnidade)));
-
+            // A linha do ViewBag foi removida para manter a consistência com a página Create.
+            // É recomendado que a sua View Edit.cshtml também use @Html.GetEnumSelectList.
             return View(unidadeMedica);
         }
 

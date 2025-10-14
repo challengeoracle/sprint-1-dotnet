@@ -22,11 +22,16 @@ body {
     color: var(--medix-800);
 }
 
-/* Container principal das páginas de autenticação */
 .auth-container {
-    max-width: 400px;
-    margin: 3rem auto;
-    padding: 1rem;
+    max-width: 450px;
+    padding: 2rem;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* Cabeçalho com Logo, Título e Subtítulo */
@@ -150,4 +155,22 @@ body {
         background-color: var(--medix-300);
         border-color: var(--medix-400);
         color: var(--medix-900);
+    }
+
+/* Estilo para um rodapé mínimo e centralizado */
+footer.footer {
+    height: 40px !important; /* Altura fixa e bem baixa */
+    min-height: auto !important;
+    padding: 0 !important; /* Remove todo o espaçamento interno */
+    font-size: 0.75rem !important; /* Fonte bem pequena */
+    /* Bônus: Centraliza o texto verticalmente na nova altura */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+    /* Remove o container para o texto não ficar preso na lateral */
+    footer.footer .container {
+        width: auto;
+        max-width: 100%;
     }
