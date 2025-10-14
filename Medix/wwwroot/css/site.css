@@ -1,22 +1,134 @@
-html {
-  font-size: 14px;
+/* Definição da Paleta de Cores Medix como Variáveis CSS */
+:root {
+    --medix-50: #FAF9F6; /* off-white suave */
+    --medix-100: #E9F4F1; /* fundo claro esverdeado */
+    --medix-200: #CFE7E2; /* input background */
+    --medix-300: #A9D2C7; /* bordas, detalhes sutis */
+    --medix-400: #7DBBAF; /* placeholders, ícones suaves */
+    --medix-500: #52A897; /* botão secundário */
+    --medix-600: #3A8F80; /* verde principal, tom médio equilibrado */
+    --medix-700: #2C6F64; /* texto escuro / destaques */
+    --medix-800: #1E4F46; /* verde profundo para contraste */
+    --medix-900: #122F29; /* fundo escuro elegante */
+    --medix-error: #E45865; /* tom de erro harmônico com verde */
+
+    --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Estilo global do corpo */
 body {
-  margin-bottom: 60px;
+    background-color: var(--medix-50) !important;
+    font-family: var(--font-family-sans-serif);
+    color: var(--medix-800);
+}
+
+/* Container principal das páginas de autenticação */
+.auth-container {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 1rem;
+}
+
+/* Cabeçalho com Logo, Título e Subtítulo */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.auth-title {
+    color: var(--medix-800);
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    color: var(--medix-700);
+    font-size: 1rem;
+}
+
+/* Estilo para os grupos de formulário (label + input) */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--medix-800);
+    }
+
+/* Estilo para os inputs */
+.form-control {
+    background-color: white;
+    border: 1px solid var(--medix-300);
+    border-radius: 12px; /* Cantos bem arredondados */
+    padding: 0.9rem 1rem;
+    height: auto;
+    color: var(--medix-900);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    .form-control::placeholder {
+        color: var(--medix-400);
+    }
+
+    .form-control:focus {
+        border-color: var(--medix-600);
+        box-shadow: 0 0 0 4px rgba(58, 143, 128, 0.2);
+        background-color: white;
+    }
+
+/* Botão principal de ação */
+.btn-primary {
+    background-color: var(--medix-600);
+    border-color: var(--medix-600);
+    border-radius: 12px;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+    .btn-primary:hover {
+        background-color: var(--medix-700);
+        border-color: var(--medix-700);
+        color: white;
+    }
+
+/* Rodapé com link para outra página */
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+    .auth-footer p {
+        color: var(--medix-700);
+    }
+
+    .auth-footer .auth-link {
+        color: var(--medix-600);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .auth-footer .auth-link:hover {
+            text-decoration: underline;
+        }
+
+/* Mensagens de validação de erro */
+.text-danger {
+    color: var(--medix-error) !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }

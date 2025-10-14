@@ -1,69 +1,88 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Registrar";
+    ViewData["Title"] = "Crie sua conta";
+    Layout = "_Layout"; // Certifique-se de que está usando um layout limpo se necessário
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="auth-container">
 
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Crie uma nova conta.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="nome@exemplo.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="senha" />
-                <label asp-for="Input.Password">Senha</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="senha" />
-                <label asp-for="Input.ConfirmPassword">Confirmar Senha</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registrar</button>
-        </form>
+    <div class="auth-header">
+        <img src="~/images/medix-logo.svg" alt="Medix Logo" class="auth-logo" />
+        <h1 class="auth-title">@ViewData["Title"]</h1>
+        <p class="auth-subtitle">Preencha os dados abaixo para começar.</p>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use outro serviço para se registrar.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            Não há serviços de autenticação externa configurados. Veja este <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                artigo
-                                sobre como configurar esta aplicação ASP.NET para suportar login via serviços externos
-                            </a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Entrar usando sua conta @provider.DisplayName">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
+
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+        <div class="form-group">
+            <label asp-for="Input.NomeCompleto">Nome Completo</label>
+            <input asp-for="Input.NomeCompleto" class="form-control" placeholder="Digite seu nome completo" />
+            <span asp-validation-for="Input.NomeCompleto" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.CPF">CPF</label>
+            <input asp-for="Input.CPF" class="form-control" placeholder="000.000.000-00" />
+            <span asp-validation-for="Input.CPF" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Email">E-mail</label>
+            <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="seuemail@exemplo.com" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.DataNascimento">Data de Nascimento</label>
+            <input asp-for="Input.DataNascimento" class="form-control" placeholder="DD/MM/AAAA" />
+            <span asp-validation-for="Input.DataNascimento" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Telefone">Telefone</label>
+            <input asp-for="Input.Telefone" class="form-control" placeholder="(XX) XXXXX-XXXX" />
+            <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Password">Senha</label>
+            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" placeholder="Crie uma senha segura" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.ConfirmPassword">Confirmar Senha</label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Confirme sua senha" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <button id="registerSubmit" type="submit" class="w-100 btn btn-primary">Confirmar Cadastro</button>
+
+        <div class="auth-footer">
+            <p>
+                Já tem uma conta?
+                <a class="auth-link" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Entrar</a>
+            </p>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var cpfInput = document.getElementById('Input_CPF');
+            if(cpfInput) IMask(cpfInput, { mask: '000.000.000-00' });
+
+            var dataInput = document.getElementById('Input_DataNascimento');
+            if(dataInput) IMask(dataInput, { mask: '00/00/0000' });
+
+            var telInput = document.getElementById('Input_Telefone');
+            if(telInput) IMask(telInput, { mask: '(00) 00000-0000' });
+        });
+    </script>
 }
