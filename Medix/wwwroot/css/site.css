@@ -291,3 +291,23 @@ footer.footer {
         width: auto;
         max-width: 100%;
     }
+
+/* Estilos para o rodapé do card e lista de detalhes */
+
+.card-footer {
+    padding: 1rem 1.5rem;
+    background-color: var(--medix-50);
+    border-top: 1px solid var(--medix-100);
+}
+
+.details-list dt {
+    color: var(--medix-700);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.details-list dd {
+    color: var(--medix-900);
+    margin-left: 0;
+    margin-bottom: 1.25rem;
+}

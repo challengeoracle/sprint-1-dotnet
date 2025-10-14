@@ -1,63 +1,34 @@
 ﻿@model Medix.Models.UnidadeMedica
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Excluir: " + Model.Nome;
+    ViewData["HideFooter"] = true; // Esconde o rodapé principal
 }
 
-<h1>Delete</h1>
+<div class="card">
+    <div class="card-header">
+        <h1>Confirmar Exclusão</h1>
+    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>UnidadeMedica</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CNPJ)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CNPJ)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmailAdmin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmailAdmin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataCadastro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataCadastro)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <div class="card-body">
+        <h4 class="text-danger">Você tem certeza que deseja excluir esta unidade?</h4>
+        <p>Esta ação não pode ser desfeita.</p>
+        <hr />
+        <dl class="details-list">
+            <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+            <dd>@Html.DisplayFor(model => model.Nome)</dd>
+            <dt>@Html.DisplayNameFor(model => model.CNPJ)</dt>
+            <dd>@Html.DisplayFor(model => model.CNPJ)</dd>
+        </dl>
+    </div>
+
+    <div class="card-footer">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
