@@ -74,7 +74,7 @@ body {
 .form-control {
     background-color: white;
     border: 1px solid var(--medix-300);
-    border-radius: 12px; /* Cantos bem arredondados */
+    border-radius: 12px;
     padding: 0.9rem 1rem;
     height: auto;
     color: var(--medix-900);
@@ -91,25 +91,29 @@ body {
         background-color: white;
     }
 
-/* Botão principal de ação */
+/* Estilo base do Botão Primário */
 .btn-primary {
     background-color: var(--medix-600);
     border-color: var(--medix-600);
     border-radius: 12px;
-    padding: 0.9rem;
-    font-size: 1rem;
+    padding: 0.75rem 1.5rem; 
+    font-size: 0.9rem;
     font-weight: 700;
-    color: white;
+    color: white !important; 
+    text-decoration: none;
     transition: background-color 0.2s;
-    margin-top: 1rem;
-    width: 100%;
 }
 
     .btn-primary:hover {
         background-color: var(--medix-700);
         border-color: var(--medix-700);
-        color: white;
     }
+
+/* Regra específica para os botões de formulário terem 100% de largura */
+.auth-container .btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+}
 
 /* Rodapé com link para outra página */
 .auth-footer {
@@ -159,11 +163,10 @@ body {
 
 /* Estilo para um rodapé mínimo e centralizado */
 footer.footer {
-    height: 40px !important; /* Altura fixa e bem baixa */
+    height: 40px !important;
     min-height: auto !important;
-    padding: 0 !important; /* Remove todo o espaçamento interno */
-    font-size: 0.75rem !important; /* Fonte bem pequena */
-    /* Bônus: Centraliza o texto verticalmente na nova altura */
+    padding: 0 !important;
+    font-size: 0.75rem !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -174,3 +177,124 @@ footer.footer {
         width: auto;
         max-width: 100%;
     }
+
+/* Estilos para a página de listagem (Index) */
+
+/* Cabeçalho da Página (Título à esquerda, botão à direita) */
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: none;
+    margin-top: 2rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: transparent;
+    border-bottom: 1px solid var(--medix-100);
+}
+
+    .card-header h1 {
+        font-size: 1.75rem;
+        color: var(--medix-800);
+        margin: 0;
+    }
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Container da Tabela */
+.table-container.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border: none;
+    overflow-x: auto;
+}
+
+/* Estilo customizado para a tabela */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .table thead {
+        border-bottom: 2px solid var(--medix-200);
+    }
+
+    .table th {
+        color: var(--medix-700);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+        vertical-align: middle;
+    }
+
+    .table td {
+        color: var(--medix-800);
+        padding: 1rem;
+        vertical-align: middle;
+        border-top: 1px solid var(--medix-100);
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--medix-50);
+    }
+
+/* Badges de Status Coloridos */
+.badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.status-ativa {
+    color: #1E6B5A;
+    background-color: #D4F3EC;
+}
+
+.status-inativa {
+    color: #596571;
+    background-color: #E9ECEF;
+}
+
+.status-suspensa {
+    color: #856404;
+    background-color: #FFF3CD;
+}
+
+.status-emteste {
+    color: #0c5460;
+    background-color: #d1ecf1;
+}
+
+/* Links de Ação na Tabela */
+.action-link {
+    color: var(--medix-600);
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 1rem;
+    transition: color 0.2s;
+}
+
+    .action-link:hover {
+        color: var(--medix-800);
+        text-decoration: underline;
+    }
+
+    .action-link.text-danger {
+        color: var(--medix-error) !important;
+    }
+
+        .action-link.text-danger:hover {
+            color: #a53d47 !important;
+        }
