@@ -1,29 +1,155 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+﻿@using Medix.ViewModels
+@model DashboardViewModel
 
 @{
-    ViewData["Title"] = "Página Inicial";
+    ViewData["Title"] = "Dashboard";
 }
 
-@if (SignInManager.IsSignedIn(User))
-{
-    // --- ÁREA PARA QUANDO O USUÁRIO ESTIVER LOGADO (FUTURO DASHBOARD) ---
-    <div class="page-header">
-        <h1>Meu Dashboard</h1>
-    </div>
-    <p>Olá, @User.Identity.Name! Bem-vindo de volta.</p>
-    <p><em>(Em breve, aqui teremos cards com o total de unidades cadastradas, atalhos e outras informações úteis.)</em></p>
+<div class="dashboard-header">
+    <h1>Bem-vindo(a) ao painel de controle Medix! </h1>
+</div>
 
-}
-else
-{
-    // --- ÁREA PARA QUANDO O USUÁRIO ESTIVER DESLOGADO (PÁGINA DE APRESENTAÇÃO) ---
-    <div class="hero-section text-center">
-        <h1 class="hero-title">Gerencie suas Unidades de Saúde com Eficiência</h1>
-        <p class="hero-subtitle">A plataforma completa para cadastro, monitoramento e gestão de dados.</p>
-        <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Começar Agora</a>
-            <a class="btn btn-outline-primary btn-lg" asp-area="Identity" asp-page="/Account/Login">Já tenho uma conta</a>
+<div class="row g-4">
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-card-number">@Model.TotalUnidades</div>
+            <div class="stat-card-label">Total de Unidades</div>
         </div>
     </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-card-number text-success">@Model.UnidadesAtivas</div>
+            <div class="stat-card-label">Unidades Ativas</div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-card-number text-warning">@Model.UnidadesSuspensas</div>
+            <div class="stat-card-label">Unidades Suspensas</div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-card-number text-muted">@Model.UnidadesInativas</div>
+            <div class="stat-card-label">Unidades Inativas</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h2>Atividade Recente</h2>
+                <a asp-controller="UnidadesMedicas" asp-action="Create" class="btn btn-primary">Cadastrar Nova Unidade</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome da Unidade</th>
+                                <th>Status</th>
+                                <th>Data de Cadastro</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.AtividadeRecente)
+                            {
+                                <tr>
+                                    <td>@item.Nome</td>
+                                    <td>
+                                        @{
+                                            var statusClass = item.Status switch
+                                            {
+                                                StatusUnidade.Ativa => "status-ativa",
+                                                StatusUnidade.Inativa => "status-inativa",
+                                                StatusUnidade.Suspensa => "status-suspensa",
+                                                _ => "status-emteste"
+                                            };
+                                        }
+                                        <span class="badge @statusClass">@item.Status</span>
+                                    </td>
+                                    <td>@item.DataCadastro.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-end">
+                                        <a asp-controller="UnidadesMedicas" asp-action="Details" asp-route-id="@item.Id" class="action-link">Ver Detalhes</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="UnidadesMedicas" asp-action="Index" class="action-link">Ver todas as unidades</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h2>Resumo de Status</h2>
+            </div>
+            <div class="card-body text-center">
+                <canvas id="statusChart" style="max-height: 250px; margin: 0 auto;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            const statusData = @Html.Raw(Json.Serialize(Model.StatusDistribution));
+
+            const labels = Object.keys(statusData);
+            const data = Object.values(statusData);
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Unidades',
+                        data: data,
+                        backgroundColor: [
+                            '#D4F3EC', // Cor para Ativas
+                            '#E9ECEF', // Cor para Inativas
+                            '#FFF3CD', // Cor para Suspensas
+                            '#d1ecf1'  // Cor para Em Teste
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+        options: {
+            responsive: true,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: true, 
+                    position: 'bottom', 
+                    align: 'center',
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 8, 
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    padding: 10,
+                    bodyFont: {
+                        size: 14
+                    }
+                }
+            }
+        }
+            });
+        });
+    </script>
 }

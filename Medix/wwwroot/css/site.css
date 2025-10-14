@@ -438,38 +438,59 @@ footer.footer {
         max-width: 100%;
     }
 
-/* --- 8. ESTILOS DA PÁGINA INICIAL (HERO SECTION) --- */
+/* --- 8. ESTILOS DO DASHBOARD (HOME PAGE LOGADA) --- */
 
-.hero-section {
-    padding: 6rem 1rem;
-    max-width: 800px;
-    margin: 2rem auto;
-}
-
-.hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--medix-800);
-    margin-bottom: 1rem;
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--medix-700);
+.dashboard-header {
     margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 2.5rem;
 }
 
-.hero-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+    .dashboard-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--medix-800);
+    }
+
+.stat-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--medix-100);
+    transition: all 0.2s ease-in-out;
 }
 
-/* Classe para botões maiores, específicos para a Hero Section */
-.btn-lg {
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+    }
+
+.stat-card-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--medix-600);
+    line-height: 1;
+}
+
+.stat-card-label {
+    font-size: 0.9rem;
+    color: var(--medix-700);
+    margin-top: 0.5rem;
+}
+
+/* Cores específicas para os números dos cards */
+.stat-card-number.text-success {
+    color: var(--medix-600) !important;
+}
+
+.stat-card-number.text-warning {
+    color: #856404 !important;
+}
+
+.stat-card-number.text-muted {
+    color: #596571 !important;
+}
+
+/* Centraliza o link no rodapé do card */
+.card-footer.text-center {
+    text-align: center;
 }
