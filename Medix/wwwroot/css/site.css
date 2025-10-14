@@ -1,4 +1,4 @@
-/* Definição da Paleta de Cores Medix como Variáveis CSS */
+/* --- 1. VARIÁVEIS GLOBAIS (CORES E FONTES) --- */
 :root {
     --medix-50: #FAF9F6;
     --medix-100: #E9F4F1;
@@ -14,18 +14,146 @@
     --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
 }
 
-/* --- ESTILOS GERAIS --- */
+/* --- 2. ESTILOS GERAIS DO CORPO DA PÁGINA --- */
 body {
     background-color: var(--medix-50) !important;
     font-family: var(--font-family-sans-serif);
     color: var(--medix-800);
 }
 
-/* --- ESTILOS PARA FORMULÁRIOS DE AUTENTICAÇÃO E CRUD --- */
+/* --- 3. CABEÇALHO PRINCIPAL (NAVBAR) --- */
+.main-navbar {
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-bottom: none;
+    height: 100px;
+}
+
+    .main-navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Logo */
+    .main-navbar .navbar-brand {
+        padding-top: 0;
+        padding-bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+
+        .main-navbar .navbar-brand img {
+            height: 100px !important;
+            width: auto;
+        }
+
+.navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Menu Hambúrguer (Toggler) */
+.main-navbar .navbar-toggler {
+    display: block;
+    border: none;
+}
+
+    .main-navbar .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+.main-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(30, 79, 70, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Área de Login/Usuário */
+.main-navbar .navbar-login {
+    margin-left: auto;
+}
+
+.navbar-login .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.navbar-login .nav-link {
+    color: var(--medix-700);
+    font-weight: 600;
+}
+
+.navbar-login .nav-item form {
+    display: inline;
+}
+
+.navbar-login .nav-item button.nav-link {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+/* Menu Lateral (Offcanvas) */
+.offcanvas-header {
+    border-bottom: 1px solid var(--medix-100);
+}
+
+.offcanvas-body .nav-link {
+    font-size: 1.1rem;
+    color: var(--medix-800);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+    .offcanvas-body .nav-link:hover {
+        color: var(--medix-600);
+        background-color: var(--medix-100);
+    }
+
+/* Estilo "Pílula" para ações de autenticação */
+.auth-actions-group {
+    display: flex;
+    background-color: var(--medix-100);
+    border-radius: 50px; /* Borda bem arredondada para formar a pílula */
+    padding: 5px;
+    border: 1px solid var(--medix-200);
+}
+
+    .auth-actions-group .nav-item {
+        display: block;
+    }
+
+    .auth-actions-group .auth-action-link {
+        padding: 0.5rem 1rem;
+        color: var(--medix-700);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.25s ease-in-out;
+    }
+
+        /* Efeito de hover para o link secundário */
+        .auth-actions-group .auth-action-link:not(.is-primary):hover {
+            background-color: var(--medix-200);
+        }
+
+        /* Estilo de destaque para a ação primária */
+        .auth-actions-group .auth-action-link.is-primary {
+            background-color: white;
+            color: var(--medix-600);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+/* --- 4. ESTILOS DE FORMULÁRIOS (AUTH E CRUD) --- */
 .auth-container {
     max-width: 450px;
     padding: 2rem;
-    margin: 4vh auto; /* Margem dinâmica para melhor centralização */
+    margin: 4vh auto;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -73,7 +201,7 @@ body {
     height: auto;
     color: var(--medix-900);
     transition: border-color 0.2s, box-shadow 0.2s;
-    width: 100%; /* Garante que o input ocupe todo o espaço */
+    width: 100%;
 }
 
     .form-control::placeholder {
@@ -86,10 +214,10 @@ body {
         background-color: white;
     }
 
-.text-danger {
-    color: var(--medix-error) !important;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+.form-actions {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
 }
 
 .auth-footer {
@@ -111,7 +239,13 @@ body {
             text-decoration: underline;
         }
 
-/* --- ESTILOS DE BOTÕES --- */
+.text-danger {
+    color: var(--medix-error) !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* --- 5. ESTILOS DE BOTÕES --- */
 .btn {
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
@@ -164,13 +298,7 @@ button.btn-danger, a.btn-danger {
     margin-top: 1rem;
 }
 
-.form-actions {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-}
-
-/* --- ESTILOS DE PÁGINA DE LISTAGEM (INDEX) --- */
+/* --- 6. ESTILOS DE CARDS E TABELAS (PÁGINA INDEX) --- */
 .card {
     background-color: white;
     border-radius: 12px;
@@ -196,6 +324,12 @@ button.btn-danger, a.btn-danger {
 
 .card-body {
     padding: 1.5rem;
+}
+
+.card-footer {
+    padding: 1rem 1.5rem;
+    background-color: var(--medix-50);
+    border-top: 1px solid var(--medix-100);
 }
 
 .table {
@@ -276,7 +410,19 @@ button.btn-danger, a.btn-danger {
             color: #a53d47 !important;
         }
 
-/* --- ESTILOS DO RODAPÉ PRINCIPAL --- */
+.details-list dt {
+    color: var(--medix-700);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.details-list dd {
+    color: var(--medix-900);
+    margin-left: 0;
+    margin-bottom: 1.25rem;
+}
+
+/* --- 7. RODAPÉ PRINCIPAL --- */
 footer.footer {
     height: 40px !important;
     min-height: auto !important;
@@ -292,22 +438,38 @@ footer.footer {
         max-width: 100%;
     }
 
-/* Estilos para o rodapé do card e lista de detalhes */
+/* --- 8. ESTILOS DA PÁGINA INICIAL (HERO SECTION) --- */
 
-.card-footer {
-    padding: 1rem 1.5rem;
-    background-color: var(--medix-50);
-    border-top: 1px solid var(--medix-100);
+.hero-section {
+    padding: 6rem 1rem;
+    max-width: 800px;
+    margin: 2rem auto;
 }
 
-.details-list dt {
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--medix-800);
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
     color: var(--medix-700);
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.details-list dd {
-    color: var(--medix-900);
-    margin-left: 0;
-    margin-bottom: 1.25rem;
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Classe para botões maiores, específicos para a Hero Section */
+.btn-lg {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
 }
